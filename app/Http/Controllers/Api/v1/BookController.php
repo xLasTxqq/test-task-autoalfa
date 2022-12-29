@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Actions\Book\DestroyBookAction;
+use App\Actions\Book\ReadBookAction;
+use App\Actions\Book\ShowBookAction;
 use App\Actions\Book\StoreBookAction;
 use App\Actions\Book\UpdateBookAction;
 use App\Http\Controllers\Controller;
@@ -18,9 +20,9 @@ class BookController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(ReadBookAction $readBookAction):Response
     {
-        //
+        return response($readBookAction());
     }
 
     /**
@@ -40,9 +42,9 @@ class BookController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id, ShowBookAction $showBookAction): Response
     {
-        //
+        return response($showBookAction($id));
     }
 
     /**

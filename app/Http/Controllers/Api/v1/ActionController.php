@@ -64,9 +64,8 @@ class ActionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id, DestroyActionsAction $destroyActionsAction)
+    public function destroy($id, DestroyActionsAction $destroyActionsAction):Response
     {
-        $destroyActionsAction($id);
-        return redirect()->route('client.index');
+        return response($destroyActionsAction($id));
     }
 }

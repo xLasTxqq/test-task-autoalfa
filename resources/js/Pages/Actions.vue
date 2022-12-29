@@ -19,7 +19,6 @@ const props = defineProps({
     actions: Array,
     user: Array
 });
-console.log(props.user);
 const deleteItem = (data) => {
     if (confirm(`Do you want to delete booking ${data.id}?`))
         useForm().delete(route("action.destroy", data.id));
@@ -34,12 +33,6 @@ const takeBook = (data) => {
     if (confirm(`Do you want to take book from action ${data.id}?`))
         useForm().delete(route("action.destroy", data.id));
 }
-// const searchForm = useForm({
-//     author_id: '',
-//     publisher_id: '',
-//     genre_id: '',
-//     name: ''
-// });
 
 const filters = ref({
     'book.name': {

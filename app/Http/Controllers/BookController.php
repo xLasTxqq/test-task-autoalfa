@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Actions\Book\CreateBookAction;
 use App\Actions\Book\DestroyBookAction;
 use App\Actions\Book\ReadBookAction;
+use App\Actions\Book\ShowBookAction;
 use App\Actions\Book\StoreBookAction;
 use App\Http\Requests\BookRequest;
 use App\Models\Author;
@@ -55,12 +56,9 @@ class BookController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id, ShowBookAction $showBookAction)
     {
-        $book = Book::with(['comments'=>fn($query)=>$query->with('user'),'genres','authors','publishers', 
-        'grades'=>fn($query)=>$query->where('user_id',auth()->id())])->withAvg('grades','stars')->findOrFail($id);
-        // dd($book);
-        return Inertia::render('ShowBook', compact('book'));
+        return Inertia::render('ShowBook', $showBookAction($id));
     }
 
     /**

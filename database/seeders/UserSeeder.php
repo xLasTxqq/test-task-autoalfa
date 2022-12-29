@@ -19,6 +19,6 @@ class UserSeeder extends Seeder
             'name'=>'admin',
             'email'=>'admin@admin',
             'password'=>bcrypt('admin')
-        ])->assignRole(['admin','librarian','client']);
+        ])->assignRole(['admin']);
     }
 }
