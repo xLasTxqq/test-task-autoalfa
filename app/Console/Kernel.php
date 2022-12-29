@@ -2,8 +2,11 @@
 
 namespace App\Console;
 
+use App\Models\Action;
+use Carbon\Carbon;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use PHPUnit\TextUI\XmlConfiguration\RemoveLogTypes;
 
 class Kernel extends ConsoleKernel
 {
@@ -16,6 +19,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
+        $schedule->job(new RemoveLogTypes())->daily();
     }
 
     /**

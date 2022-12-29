@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\v1;
 
 use App\Actions\Action\CreateActionsAction;
 use App\Actions\Action\DestroyActionsAction;
 use App\Actions\Action\ReadActionsAction;
 use App\Actions\Action\UpdateActionsAction;
 use App\Actions\UpdateActionClientAction;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\ActionRequest;
 use App\Models\Action;
 use Illuminate\Http\Request;
