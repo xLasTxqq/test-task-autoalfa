@@ -1,0 +1,1 @@
+<p>Your password is {{$password}}. And login is your email.</p>

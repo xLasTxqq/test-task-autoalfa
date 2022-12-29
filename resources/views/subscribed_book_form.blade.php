@@ -1,0 +1,1 @@
+<p>Now your can book a book: {{$book['name']}}</p>

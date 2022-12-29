@@ -20,5 +20,11 @@
         "tailwindcss": "^3.2.1",
         "vite": "^4.0.0",
         "vue": "^3.2.41"
+    },
+    "dependencies": {
+        "@casl/ability": "^6.3.3",
+        "@casl/vue": "^2.2.1",
+        "laravel-permission-to-vuejs": "^3.0.1",
+        "primevue": "^3.9.1"
     }
 }

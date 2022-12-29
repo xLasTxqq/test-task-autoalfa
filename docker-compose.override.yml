@@ -6,7 +6,7 @@ services:
 
   database:
     ports:
-      - ${DB_DATABASE:-5432}:5432
+      - ${DB_PORT:-5432}:5432
 
   adminer:
     image: adminer
