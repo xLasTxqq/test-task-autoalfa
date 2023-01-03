@@ -1,17 +1,16 @@
 <?php
 
-namespace App\Http\Controllers\Api\V1;
+namespace App\Http\Controllers\Api\v1;
 
 use App\Actions\Book\DestroyBookAction;
-use App\Actions\Book\ReadBookAction;
+use App\Actions\Book\IndexBookAction;
 use App\Actions\Book\ShowBookAction;
 use App\Actions\Book\StoreBookAction;
 use App\Actions\Book\UpdateBookAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\BookRequest;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use App\Models\Book;
+use Illuminate\Http\Resources\Json\JsonResource;
 
 class BookController extends Controller
 {
@@ -20,53 +19,53 @@ class BookController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(ReadBookAction $readBookAction):Response
+    public function index(IndexBookAction $indexBookAction): JsonResource
     {
-        return response($readBookAction());
+        return $indexBookAction();
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(BookRequest $request, StoreBookAction $storeBookAction):Response
+    public function store(BookRequest $request, StoreBookAction $storeBookAction): JsonResource
     {
-        return response($storeBookAction($request));
+        return $storeBookAction($request);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id, ShowBookAction $showBookAction): Response
+    public function show(Book $book, ShowBookAction $showBookAction): JsonResource
     {
-        return response($showBookAction($id));
+        return $showBookAction($book);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int                      $id
      * @return \Illuminate\Http\Response
      */
-    public function update(BookRequest $request, $id, UpdateBookAction $updateBookAction):Response
+    public function update(Book $book, BookRequest $request, UpdateBookAction $updateBookAction): JsonResource
     {
-        return response($updateBookAction($request, $id));
+        return $updateBookAction($request, $book);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id, DestroyBookAction $destroyBookAction):Response
+    public function destroy(Book $book, DestroyBookAction $destroyBookAction): JsonResource
     {
-        return response($destroyBookAction($id));
+        return $destroyBookAction($book);
     }
 }

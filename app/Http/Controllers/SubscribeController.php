@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Actions\Subscribe\CreateSubscribeAction;
+use App\Actions\Subscribe\StoreSubscribeAction;
 use Illuminate\Http\Request;
 
 class SubscribeController extends Controller
@@ -33,7 +34,7 @@ class SubscribeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, CreateSubscribeAction $createSubscribeAction)
+    public function store(Request $request, StoreSubscribeAction $createSubscribeAction)
     {
         $createSubscribeAction($request);
         return back();

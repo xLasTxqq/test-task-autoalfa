@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers\Api\v1;
 
-use App\Actions\Action\CreateActionsAction;
 use App\Actions\Action\DestroyActionsAction;
-use App\Actions\Action\ReadActionsAction;
+use App\Actions\Action\IndexActionsAction;
+use App\Actions\Action\StoreActionsAction;
 use App\Actions\Action\UpdateActionsAction;
-use App\Actions\UpdateActionClientAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ActionRequest;
 use App\Models\Action;
-use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Response;
 
 class ActionController extends Controller
@@ -20,9 +19,9 @@ class ActionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(ReadActionsAction $readActionsAction):Response
+    public function index(IndexActionsAction $indexActionsAction): JsonResource
     {
-        return response($readActionsAction());
+        return $indexActionsAction();
     }
 
     /**
@@ -31,9 +30,9 @@ class ActionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, CreateActionsAction $createActionsAction):Response
+    public function store(ActionRequest $request, StoreActionsAction $storeActionsAction): JsonResource
     {
-        return response($createActionsAction($request));
+        return $storeActionsAction($request);
     }
 
     /**
@@ -54,9 +53,9 @@ class ActionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Action $id, UpdateActionsAction $updateActionsAction)
+    public function update(Action $action, UpdateActionsAction $updateActionsAction): JsonResource
     {
-        return response($updateActionsAction($id));
+        return $updateActionsAction($action);
     }
 
     /**
@@ -65,8 +64,8 @@ class ActionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id, DestroyActionsAction $destroyActionsAction):Response
+    public function destroy(Action $action, DestroyActionsAction $destroyActionsAction): JsonResource
     {
-        return response($destroyActionsAction($id));
+        return $destroyActionsAction($action);
     }
 }

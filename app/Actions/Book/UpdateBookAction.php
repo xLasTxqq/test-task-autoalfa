@@ -3,15 +3,16 @@
 namespace App\Actions\Book;
 
 use App\Http\Requests\BookRequest;
+use App\Http\Resources\BookResource;
 use App\Models\Book;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Resources\Json\JsonResource;
 
 class UpdateBookAction
 {
 
-    function __invoke(BookRequest $request, $id): Model
+    function __invoke(BookRequest $request, Book $book): JsonResource
     {
-        return Book::findOrFail($id)
-            ->update($request->only('name', 'author_id', 'genre_id', 'publisher_id', 'status_id'));
+        $book->update($request->validated());
+        return new BookResource($book);
     }
 }

@@ -2,15 +2,13 @@
 
 namespace App\Actions\Book;
 
-use App\Http\Requests\BookRequest;
-use App\Models\Book;
+use App\Http\Resources\BookResource;
+use Illuminate\Http\Resources\Json\JsonResource;
 
 class ShowBookAction
 {
-    function __invoke($id): Array
+    function __invoke($book): JsonResource
     {
-        $book = Book::with(['comments'=>fn($query)=>$query->with('user')->orderBy('id', 'desc'),'genres','authors','publishers', 
-        'grades'=>fn($query)=>$query->where('user_id',auth()->id())])->withAvg('grades','stars')->findOrFail($id);
-        return compact('book');
+        return new BookResource($book);
     }
 }

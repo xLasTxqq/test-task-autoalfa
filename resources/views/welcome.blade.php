@@ -21,6 +21,14 @@
         </style>
     </head>
     <body class="antialiased">
+   
+            <h1>{{$readBookAction->name}}</h1>
+            <h1>{{$readBookAction->author->name}}</h1>
+            <h1>{{$readBookAction->publisher->name}}</h1>
+            <h1>{{$readBookAction->genre->name}}</h1>
+            <h1>{{$readBookAction->avg_grade}}</h1>
+            <h1>{{$readBookAction->grade}}</h1>
+     
         <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
             @if (Route::has('login'))
                 <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">

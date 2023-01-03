@@ -24,9 +24,7 @@ class ActionRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id'=>'require|exists:users,id',
-            'book_id'=>'require|exists:books,id',
-            'status_id'=>'require|exists:statuses,id',
+            'book_id'=>'required|exists:books,id',
         ];
     }
 }

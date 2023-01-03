@@ -10,7 +10,7 @@ use App\Models\Action;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
-class ActionController extends Controller
+class ActionController extends Controller 
 {
     /**
      * Display a listing of the resource.

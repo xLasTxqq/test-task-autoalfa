@@ -3,13 +3,14 @@
 namespace App\Actions\Book;
 
 use App\Http\Requests\BookRequest;
+use App\Http\Resources\BookResource;
 use App\Models\Book;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Resources\Json\JsonResource;
 
 class StoreBookAction
 {
-    function __invoke(BookRequest $request): Model
+    function __invoke(BookRequest $request): JsonResource
     {
-        return Book::firstOrCreate($request->only('name', 'author_id', 'genre_id', 'publisher_id'));
+        return new BookResource(Book::firstOrCreate($request->validated()));
     }
 }

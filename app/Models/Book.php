@@ -16,15 +16,17 @@ class Book extends Model
         'publisher_id'
     ];
 
-    public function authors(){
+    // protected $appends = ['getter'];
+
+    public function author(){
         return $this->belongsTo(Author::class, 'author_id', 'id');
     }
 
-    public function genres(){
+    public function genre(){
         return $this->belongsTo(Genre::class, 'genre_id', 'id');
     }
 
-    public function publishers(){
+    public function publisher(){
         return $this->belongsTo(Publisher::class, 'publisher_id', 'id');
     }
 
@@ -37,7 +39,7 @@ class Book extends Model
     }
 
     public function action(){
-        return $this->hasMany(Action::class, 'book_id', 'id');
+        return $this->hasOne(Action::class, 'book_id', 'id');
     }
 
     public function subscribers(){
@@ -46,9 +48,5 @@ class Book extends Model
 
     public function countSubscribers($query){
         return $query->with(['subscribers'=>fn($query)=>$query->count()]);
-    }
-
-    public function avgGrade($query){
-        return $query->with(['grades'=>fn($query)=>$query->avg('stars')]);
     }
 }

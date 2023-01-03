@@ -28,7 +28,6 @@ class BookRequest extends FormRequest
             'author_id'=>'required|exists:authors,id',
             'genre_id'=>'required|exists:genres,id',
             'publisher_id'=>'required|exists:publishers,id',
-            // 'status_id'=>'required|exists:statuses,id'
         ];
     }
 }

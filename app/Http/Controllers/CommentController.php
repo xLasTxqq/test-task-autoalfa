@@ -33,7 +33,7 @@ class CommentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request) 
     {
         $request->validate(['book_id'=>'required|exists:books,id','text'=>'required|max:255|string']);
         Comment::create([...$request->only(['book_id','text']),'user_id'=>auth()->id()]);

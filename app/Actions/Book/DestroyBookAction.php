@@ -2,13 +2,15 @@
 
 namespace App\Actions\Book;
 
+use App\Http\Resources\BookResource;
 use App\Models\Book;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Resources\Json\JsonResource;
 
 class DestroyBookAction
 {
-    function __invoke(int $id): Model
+    function __invoke(Book $book): JsonResource
     {
-        return Book::findOrFail($id)->delete();
+        $book->delete();
+        return new BookResource($book);
     }
 }

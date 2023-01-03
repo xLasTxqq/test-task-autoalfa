@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Actions\Book\CreateBookAction;
 use App\Actions\Book\DestroyBookAction;
-use App\Actions\Book\ReadBookAction;
+use App\Actions\Book\IndexBookAction;
 use App\Actions\Book\ShowBookAction;
 use App\Actions\Book\StoreBookAction;
 use App\Http\Requests\BookRequest;
@@ -22,9 +22,9 @@ class BookController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(ReadBookAction $readBookAction)
+    public function index(IndexBookAction $indexBookAction)
     {
-        return Inertia::render('Books', $readBookAction());
+        return Inertia::render('Books', $indexBookAction());
     }
 
     /**
