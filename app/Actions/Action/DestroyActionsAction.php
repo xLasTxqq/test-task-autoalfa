@@ -16,7 +16,7 @@ class DestroyActionsAction
             $hasPermissionLendOutAndAcceptBooks &&
                 $action->status_id != Status::TAKEN_STATUS_ID &&
                 $action->user_id != auth()->id(),
-            403,
+            403, 
             "You can't do this"
         );
         abort_if(

@@ -31,7 +31,6 @@ class RoleAndPermissionSeeder extends Seeder
             ['name' => User::PERMISSION_RESERVE_AND_CANCEL_RESERVE_BOOKS],
             ['name' => User::PERMISSION_SUBSCRIBE_TO_BOOKS],
             ['name' => User::PERMISSION_UPDATE_OTHERS_PASSWORD],
-            ['name' => User::PERMISSION_UPDATE_SELF_PASSWORD]
         ];
 
         foreach ($permissions as $permission)
@@ -51,7 +50,6 @@ class RoleAndPermissionSeeder extends Seeder
         ]);
 
         Role::create(['name' => 'client'])->givePermissionTo([
-            User::PERMISSION_UPDATE_SELF_PASSWORD,
             User::PERMISSION_SUBSCRIBE_TO_BOOKS,
             User::PERMISSION_RESERVE_AND_CANCEL_RESERVE_BOOKS,
             User::PERMISSION_COMMENT_AND_RATE_BOOKS

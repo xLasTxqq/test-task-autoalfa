@@ -17,7 +17,7 @@ class NotificationSubscribedBookForm extends Mailable
     /**
      * Create a new message instance.
      *
-     * @return void
+     * @return void 
      */
     public function __construct(private Book $book)
     {
@@ -44,7 +44,7 @@ class NotificationSubscribedBookForm extends Mailable
     public function content()
     {
         return new Content(
-            view: 'subscribed_book_form',
+            view: 'mail/subscribed_book_mail_form',
             with: ['book'=>$this->book]
         );
     }

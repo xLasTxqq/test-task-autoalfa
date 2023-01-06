@@ -16,9 +16,8 @@ class Action extends Model
         'status_id',
     ];
 
-    protected $dispatchedEvents = [
-        'delete'=>BookCanBeBookedEvent::class,
-        'forceDeleted'=>BookCanBeBookedEvent::class,
+    protected $dispatchesEvents = [
+        'deleting'=>BookCanBeBookedEvent::class,
     ];
 
     public function book()

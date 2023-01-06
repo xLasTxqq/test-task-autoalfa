@@ -33,7 +33,7 @@ class SendMailAboutBookJob implements ShouldQueue
      */
     public function handle()
     {
-        $subs = Subscriber::where('book_id', $this->book_id)->with('user','book')->get();
+        $subs = Subscriber::where('book_id', $this->book_id)->with('user','book')->get()->toArray();
         foreach($subs as $sub){
             Mail::to($sub->user)->send(new NotificationSubscribedBookForm($sub->book));
             $sub->delete();

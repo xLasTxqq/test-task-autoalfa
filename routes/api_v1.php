@@ -27,7 +27,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->group(
     function () {
-
         Route::group(['middleware' => ['permission:' . User::PERMISSION_CREATE_UPDATE_DELETE_BOOKS]], function () {
             Route::apiResource('genre', GenreController::class)->only(['store', 'destroy']);
             Route::apiResource('author', AuthorController::class)->only(['store', 'destroy']);

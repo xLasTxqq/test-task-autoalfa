@@ -17,7 +17,7 @@ class NotificationPasswordForm extends Mailable
      * Create a new message instance.
      *
      * @return void
-     */
+     */ 
     public function __construct(private string $password)
     {
         //
@@ -43,7 +43,7 @@ class NotificationPasswordForm extends Mailable
     public function content()
     {
         return new Content(
-            view: 'password_mail_form',
+            view: 'mail/password_mail_form',
             with: ['password'=>$this->password]
         );
     }
