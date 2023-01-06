@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers\Api\v1;
 
+use App\Actions\Comment\DestroyCommentAction;
 use App\Actions\Comment\StoreCommentAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CommentRequest;
+use App\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\Response;
 
 class CommentController extends Controller
 {
@@ -60,8 +63,8 @@ class CommentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Comment $comment, DestroyCommentAction $destroyCommentAction): Response
     {
-        //
+        return $destroyCommentAction($comment);
     }
 }

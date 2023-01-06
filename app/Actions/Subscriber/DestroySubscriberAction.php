@@ -2,16 +2,15 @@
 
 namespace App\Actions\Subscriber;
 
-use App\Http\Resources\SubscriberResource;
 use App\Models\Subscriber;
-use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\Response;
 
 class DestroySubscriberAction
 {
-    function __invoke(Subscriber $subscriber): JsonResource
+    function __invoke(Subscriber $subscriber): Response
     {
-        if($subscriber->user_id != auth()->id()) abort('403', "You can't do this");
+        abort_if($subscriber->user_id != auth()->id(), '403', "You can't do this");
         $subscriber->delete();
-        return new SubscriberResource($subscriber);
+        return response()->noContent();
     }
 }

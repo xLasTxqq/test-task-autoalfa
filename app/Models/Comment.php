@@ -12,14 +12,14 @@ class Comment extends Model
     protected $fillable = [
         'text',
         'user_id',
-        'book_id'
+        'book_id' 
     ];
 
     protected static function boot()
     {
         parent::boot();
 
-        self::creating(fn($model)=>$model->user_id=auth()->id());
+        self::creating(fn ($model) => $model->user_id = auth()->id());
     }
 
     public function user()

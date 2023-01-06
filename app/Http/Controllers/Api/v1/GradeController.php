@@ -9,6 +9,7 @@ use App\Http\Requests\GradeRequest;
 use App\Models\Grade;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\Response;
 
 class GradeController extends Controller
 {
@@ -62,7 +63,7 @@ class GradeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Grade $grade, DestroyGradeAction $destroyGradeAction): JsonResource
+    public function destroy(Grade $grade, DestroyGradeAction $destroyGradeAction): Response
     {
         return $destroyGradeAction($grade);
     }

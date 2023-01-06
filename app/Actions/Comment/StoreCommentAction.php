@@ -11,6 +11,6 @@ class StoreCommentAction
 {
     function __invoke(CommentRequest $request): JsonResource
     {
-        return new CommentResource(Comment::create($request->validated()));
+        return new CommentResource(Comment::create($request->validated())); 
     }
 }

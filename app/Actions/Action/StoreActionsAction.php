@@ -5,6 +5,7 @@ namespace App\Actions\Action;
 use App\Http\Requests\ActionRequest;
 use App\Http\Resources\ActionCollection;
 use App\Models\Action;
+use App\Models\Status;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class StoreActionsAction
@@ -14,7 +15,7 @@ class StoreActionsAction
     {
         $action = Action::firstOrCreate(
             $request->validated(),
-            ['status_id'=>1, 'user_id'=>auth()->id()]
+            ['status_id'=>Status::BOOKED_STATUS_ID, 'user_id'=>auth()->id()]
         );
         return new ActionCollection($action);
     }

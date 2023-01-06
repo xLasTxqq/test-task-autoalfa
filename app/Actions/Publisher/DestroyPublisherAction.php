@@ -2,15 +2,14 @@
 
 namespace App\Actions\Publisher;
 
-use App\Http\Resources\PublisherResource;
 use App\Models\Publisher;
-use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\Response;
 
 class DestroyPublisherAction
 {
-    function __invoke(Publisher $publisher): JsonResource
+    function __invoke(Publisher $publisher): Response
     {
         $publisher->delete();
-        return new PublisherResource($publisher);
+        return response()->noContent();
     }
 }

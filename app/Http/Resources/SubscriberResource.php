@@ -16,8 +16,8 @@ class SubscriberResource extends JsonResource
     {
         return [
             'id'=>$this->id,
-            'book'=>new BookCollection($this->book),
-            'user'=>new UserCollection($this->user)
+            'book_id'=>$this->book_id,
+            'user_id'=>$this->user_id
         ];
     }
 }

@@ -11,6 +11,7 @@ use App\Http\Requests\GenreRequest;
 use App\Models\Genre;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\Response;
 
 class GenreController extends Controller
 {
@@ -64,7 +65,7 @@ class GenreController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Genre $genre, DestroyGenreAction $destroyGenreAction): JsonResource
+    public function destroy(Genre $genre, DestroyGenreAction $destroyGenreAction): Response
     {
         return $destroyGenreAction($genre);
     }

@@ -11,6 +11,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\BookRequest;
 use App\Models\Book;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\Response;
 
 class BookController extends Controller
 {
@@ -64,7 +65,7 @@ class BookController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Book $book, DestroyBookAction $destroyBookAction): JsonResource
+    public function destroy(Book $book, DestroyBookAction $destroyBookAction): Response
     {
         return $destroyBookAction($book);
     }

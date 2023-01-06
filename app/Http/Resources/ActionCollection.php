@@ -17,7 +17,7 @@ class ActionCollection extends JsonResource
         return [
             'id'=>$this->id,
             'user'=>new UserCollection($this->user),
-            'book'=>new BookCollection($this->book),
+            'book'=>new ActionBookCollection($this->book),
             'status'=> new StatusCollection($this->status)
         ];
     }

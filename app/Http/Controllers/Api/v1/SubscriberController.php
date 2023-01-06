@@ -9,6 +9,7 @@ use App\Http\Requests\SubscriberRequest;
 use App\Models\Subscriber;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\Response;
 
 class SubscriberController extends Controller
 {
@@ -62,7 +63,7 @@ class SubscriberController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Subscriber $subscriber, DestroySubscriberAction $destroySubscriberAction): JsonResource
+    public function destroy(Subscriber $subscriber, DestroySubscriberAction $destroySubscriberAction): Response
     {
         return $destroySubscriberAction($subscriber);
     }

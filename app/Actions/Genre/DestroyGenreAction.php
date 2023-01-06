@@ -2,15 +2,14 @@
 
 namespace App\Actions\Genre;
 
-use App\Http\Resources\GenreResource;
 use App\Models\Genre;
-use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\Response;
 
 class DestroyGenreAction
 {
-    function __invoke(Genre $genre): JsonResource
+    function __invoke(Genre $genre): Response
     {
         $genre->delete();
-        return new GenreResource($genre);
+        return response()->noContent();
     }
 }

@@ -3,7 +3,6 @@
 namespace App\Jobs;
 
 use App\Mail\NotificationPasswordForm;
-use App\Models\Genre;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;

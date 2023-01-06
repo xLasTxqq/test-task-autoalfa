@@ -16,37 +16,38 @@ class Book extends Model
         'publisher_id'
     ];
 
-    // protected $appends = ['getter'];
-
-    public function author(){
+    public function author()
+    {
         return $this->belongsTo(Author::class, 'author_id', 'id');
     }
 
-    public function genre(){
+    public function genre()
+    {
         return $this->belongsTo(Genre::class, 'genre_id', 'id');
     }
 
-    public function publisher(){
+    public function publisher()
+    {
         return $this->belongsTo(Publisher::class, 'publisher_id', 'id');
     }
 
-    public function comments(){
+    public function comments()
+    {
         return $this->hasMany(Comment::class, 'book_id', 'id');
     }
 
-    public function grades(){
+    public function grades()
+    {
         return $this->hasMany(Grade::class, 'book_id', 'id');
     }
 
-    public function action(){
+    public function action()
+    {
         return $this->hasOne(Action::class, 'book_id', 'id');
     }
 
-    public function subscribers(){
+    public function subscribers()
+    {
         return $this->hasMany(Subscriber::class, 'book_id', 'id');
-    }
-
-    public function countSubscribers($query){
-        return $query->with(['subscribers'=>fn($query)=>$query->count()]);
     }
 }

@@ -11,6 +11,7 @@ use App\Http\Requests\AuthorRequest;
 use App\Models\Author;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\Response;
 
 class AuthorController extends Controller
 {
@@ -64,7 +65,7 @@ class AuthorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Author $author, DestroyAuthorAction $destroyAuthorAction)
+    public function destroy(Author $author, DestroyAuthorAction $destroyAuthorAction): Response
     {
         return $destroyAuthorAction($author);
     }

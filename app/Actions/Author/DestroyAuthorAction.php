@@ -2,15 +2,14 @@
 
 namespace App\Actions\Author;
 
-use App\Http\Resources\AuthorResource;
 use App\Models\Author;
-use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\Response;
 
 class DestroyAuthorAction
 {
-    function __invoke(Author $author): JsonResource
+    function __invoke(Author $author): Response
     {
         $author->delete();
-        return new AuthorResource($author);
+        return response()->noContent();
     }
 }

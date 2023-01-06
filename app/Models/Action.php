@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Events\BookCanBeBookedEvent;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -13,6 +14,11 @@ class Action extends Model
         'user_id',
         'book_id',
         'status_id',
+    ];
+
+    protected $dispatchedEvents = [
+        'delete'=>BookCanBeBookedEvent::class,
+        'forceDeleted'=>BookCanBeBookedEvent::class,
     ];
 
     public function book()

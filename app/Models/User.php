@@ -8,14 +8,21 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
-use LaravelAndVueJS\Traits\LaravelPermissionToVueJS;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, HasRoles, LaravelPermissionToVueJS;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles; 
 
+
+    public const PERMISSION_CREATE_UPDATE_DELETE_BOOKS = 'create_update_delete_books';
+    public const PERMISSION_UPDATE_OTHERS_PASSWORD = 'update_others_password';
+    public const PERMISSION_CREATE_DELETE_USERS = 'create_delete_users';
+    public const PERMISSION_RESERVE_AND_CANCEL_RESERVE_BOOKS = 'reserve_and_cancel_reserve_books';
+    public const PERMISSION_LEND_OUT_AND_ACCEPT_BOOKS = 'lend_out_and_accept_books';
+    public const PERMISSION_SUBSCRIBE_TO_BOOKS = 'subscribe_to_books';
+    public const PERMISSION_COMMENT_AND_RATE_BOOKS = 'comment_and_rate_books';
     /**
-     * The attributes that are mass assignable.
+     * The attributes that are mass assignable. 
      *
      * @var array<int, string>
      */
@@ -34,7 +41,7 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
-
+    
     /**
      * The attributes that should be cast.
      *
@@ -51,28 +58,16 @@ class User extends Authenticatable
 
     public function grades()
     {
-        return $this->hasMany(Comment::class, 'user_id', 'id');
+        return $this->hasMany(Grade::class, 'user_id', 'id');
     }
 
     public function subscribers()
     {
-        return $this->hasMany(Comment::class, 'user_id', 'id');
+        return $this->hasMany(Subscriber::class, 'user_id', 'id');
     }
 
     public function actions()
     {
         return $this->hasMany(Actions::class, 'user_id', 'id');
-    }
-
-    public function takenBooks($query)
-    {
-        $status_id = Status::where(['name'=>'taken'])->first()->id;
-        return $query->with(['actions'=>fn($queryActions)=>$queryActions->where(['id_status' => $status_id])]);
-    }
-
-    public function bookedBooks($query)
-    {
-        $status_id = Status::where(['name'=>'booked'])->first()->id;
-        return $query->with(['actions'=>fn($queryActions)=>$queryActions->where(['id_status' => $status_id])]);
     }
 }

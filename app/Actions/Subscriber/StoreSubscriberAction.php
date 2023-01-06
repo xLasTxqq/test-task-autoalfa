@@ -13,7 +13,7 @@ class StoreSubscriberAction
     {
         return new SubscriberResource(Subscriber::firstOrCreate([
             'user_id' => auth()->id(),
-            'book_id' => $request->book_id
+            'book_id' => $request->book_id 
         ]));
     }
 }

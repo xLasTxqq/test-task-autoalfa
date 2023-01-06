@@ -2,26 +2,31 @@
 
 namespace App\Actions\Action;
 
-use App\Events\BookIsFree;
 use App\Models\Action;
-use Illuminate\Http\Resources\Json\JsonResource;
+use App\Models\Status;
+use App\Models\User;
+use Illuminate\Http\Response;
 
 class DestroyActionsAction
 {
-    function __invoke(Action $action): JsonResource
+    function __invoke(Action $action): Response
     {
-        if (
-            auth()->user()->hasPermissionTo('give_and_take_books') &&
-            $action->status_id != 2 &&
-            $action->user_id != auth()->id()
-        ) abort(403, "You can't do this");
-        else if (
-            !auth()->user()->hasPermissionTo('give_and_take_books') &&
-            $action->user_id != auth()->id()
-        )
-            abort(403, "You can't do this");
+        $hasPermissionLendOutAndAcceptBooks = auth()->user()->hasPermissionTo(User::PERMISSION_LEND_OUT_AND_ACCEPT_BOOKS);
+        abort_if(
+            $hasPermissionLendOutAndAcceptBooks &&
+                $action->status_id != Status::TAKEN_STATUS_ID &&
+                $action->user_id != auth()->id(),
+            403,
+            "You can't do this"
+        );
+        abort_if(
+            !$hasPermissionLendOutAndAcceptBooks &&
+                ($action->user_id != auth()->id() ||
+                    $action->status_id == Status::BOOKED_STATUS_ID),
+            403,
+            "You can't do this"
+        );
         $action->delete();
-        event(new BookIsFree($action->book_id));
-        return new JsonResource($action);
+        return response()->noContent();
     }
 }

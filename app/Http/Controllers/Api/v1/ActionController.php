@@ -64,7 +64,7 @@ class ActionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Action $action, DestroyActionsAction $destroyActionsAction): JsonResource
+    public function destroy(Action $action, DestroyActionsAction $destroyActionsAction): Response
     {
         return $destroyActionsAction($action);
     }

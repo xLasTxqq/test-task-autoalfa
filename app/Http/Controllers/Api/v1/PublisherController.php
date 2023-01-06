@@ -11,6 +11,7 @@ use App\Http\Requests\PublisherRequest;
 use App\Models\Publisher;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\Response;
 
 class PublisherController extends Controller
 {
@@ -64,7 +65,7 @@ class PublisherController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Publisher $publisher, DestroyPublisherAction $destroyPublisherAction): JsonResource
+    public function destroy(Publisher $publisher, DestroyPublisherAction $destroyPublisherAction): Response
     {
         return $destroyPublisherAction($publisher);
     }

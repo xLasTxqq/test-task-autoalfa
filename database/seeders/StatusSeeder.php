@@ -15,8 +15,8 @@ class StatusSeeder extends Seeder
     public function run()
     {
         Status::truncate();
-        
-        Status::create(['name'=>'booked']);
-        Status::create(['name'=>'taken']);
+
+        Status::create(['name' => Status::BOOKED_STATUS_NAME]);
+        Status::create(['name' => Status::TAKEN_STATUS_NAME]);
     }
 }

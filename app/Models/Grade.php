@@ -9,6 +9,9 @@ class Grade extends Model
 {
     use HasFactory;
 
+    public const MIN_STARS = 1;
+    public const MAX_STARS = 10;
+
     protected $fillable = [
         'stars',
         'user_id',

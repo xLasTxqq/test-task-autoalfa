@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
@@ -22,24 +23,38 @@ class RoleAndPermissionSeeder extends Seeder
         Permission::truncate();
         Role::truncate();
 
-        Permission::create(['name'=>'update_and_delete_users']);
-        Permission::create(['name'=>'update_password']);
-        Permission::create(['name'=>'update_and_delete_books']);
-        Permission::create(['name'=>'give_and_take_books']);
-        Permission::create(['name'=>'book_and_cancel']);
+        $permissions = [
+            ['name' => User::PERMISSION_COMMENT_AND_RATE_BOOKS],
+            ['name' => User::PERMISSION_CREATE_DELETE_USERS],
+            ['name' => User::PERMISSION_CREATE_UPDATE_DELETE_BOOKS],
+            ['name' => User::PERMISSION_LEND_OUT_AND_ACCEPT_BOOKS],
+            ['name' => User::PERMISSION_RESERVE_AND_CANCEL_RESERVE_BOOKS],
+            ['name' => User::PERMISSION_SUBSCRIBE_TO_BOOKS],
+            ['name' => User::PERMISSION_UPDATE_OTHERS_PASSWORD],
+            ['name' => User::PERMISSION_UPDATE_SELF_PASSWORD]
+        ];
 
-        Role::create(['name'=>'admin'])->givePermissionTo([
-            'update_and_delete_users',
-            'update_password'
+        foreach ($permissions as $permission)
+            Permission::create($permission);
+
+        Role::create(['name' => 'admin'])->givePermissionTo([
+            User::PERMISSION_CREATE_DELETE_USERS,
+            User::PERMISSION_UPDATE_OTHERS_PASSWORD,
         ]);
 
-        Role::create(['name'=>'librarian'])->givePermissionTo([
-            'update_and_delete_books',
-            'give_and_take_books'
+        Role::create(['name' => 'librarian'])->givePermissionTo([
+            User::PERMISSION_CREATE_UPDATE_DELETE_BOOKS,
+            User::PERMISSION_LEND_OUT_AND_ACCEPT_BOOKS,
+            User::PERMISSION_RESERVE_AND_CANCEL_RESERVE_BOOKS,
+            User::PERMISSION_COMMENT_AND_RATE_BOOKS,
+            User::PERMISSION_SUBSCRIBE_TO_BOOKS
         ]);
 
-        Role::create(['name'=>'client'])->givePermissionTo([
-            'book_and_cancel',
+        Role::create(['name' => 'client'])->givePermissionTo([
+            User::PERMISSION_UPDATE_SELF_PASSWORD,
+            User::PERMISSION_SUBSCRIBE_TO_BOOKS,
+            User::PERMISSION_RESERVE_AND_CANCEL_RESERVE_BOOKS,
+            User::PERMISSION_COMMENT_AND_RATE_BOOKS
         ]);
     }
 }

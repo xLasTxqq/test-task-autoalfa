@@ -2,15 +2,14 @@
 
 namespace App\Actions\Grade;
 
-use App\Http\Resources\GradeResource;
 use App\Models\Grade;
-use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\Response;
 
 class DestroyGradeAction
 {
-    function __invoke(Grade $grade): JsonResource
+    function __invoke(Grade $grade): Response
     {
         $grade->delete();
-        return new GradeResource($grade);
+        return response()->noContent();
     }
 }

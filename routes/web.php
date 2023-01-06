@@ -14,10 +14,23 @@ use App\Http\Controllers\PublisherController;
 use App\Http\Controllers\SubscribeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WorkerActionController;
+use App\Http\Resources\ActionBookCollection;
+use App\Http\Resources\ActionCollection;
+use App\Http\Resources\ActionResource;
+use App\Http\Resources\BookCollection;
+use App\Http\Resources\BookResource;
+use App\Http\Resources\CommentResource;
+use App\Http\Resources\SubscriberResource;
+use App\Models\Action;
+use App\Models\Book;
+use App\Models\Comment;
 use App\Models\Publisher;
+use App\Models\Subscriber;
+use App\Models\User;
+use Barryvdh\Debugbar\Facades\Debugbar;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia; 
+use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +43,35 @@ use Inertia\Inertia;
 |
 */
 
+Route::get('/', function () {
+    // if (env('APP_DEBUG')) {
+    //     Debugbar::debugJSON(
+    //         BookCollection::collection(Book::with('author','publisher','genre','action','action.status','comments')->get())
+    //     );
+    //    }
+    // Action::factory()->create();
+    // Comment::create(['book_id'=>Book::first()->id,'text'=>'gfdgdfgd','user_id'=>User::first()->id]);
+    // Subscriber::factory()->create();
+    return view('welcome', ['data' =>
+    // ActionCollection::collection(
+    //     Action::with(
+    //         'user',
+    //         'book',
+    //         'status',
+    //         'book.author',
+    //         'book.publisher',
+    //         'book.genre',
+    //         'book.grades',
+    //     )->get())
+    
+        // new CommentResource(Comment::first())
+        // SubscriberResource::collection(Subscriber::all())
+        new BookResource(Book::factory()->hasComments()->create())
+        // new ActionCollection(Action::factory()->create())
+    ]);
+    //    return BookResource::collection(Book::all());
+    return true;
+});
 // Route::get('/', function () {
 //     return Inertia::render('Welcome', [
 //         'canLogin' => Route::has('login'),

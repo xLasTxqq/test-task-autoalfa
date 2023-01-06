@@ -11,7 +11,7 @@ class IndexBookAction
     public function __invoke(): JsonResource
     {
         return BookCollection::collection(
-            Book::paginate(20)
+            Book::with('author','publisher','genre','action','action.status','grades','subscribers')->paginate(20)
         );
     }
 }

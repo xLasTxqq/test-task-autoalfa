@@ -2,6 +2,9 @@
 
 namespace Database\Factories;
 
+use App\Models\Author;
+use App\Models\Genre;
+use App\Models\Publisher;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -18,9 +21,9 @@ class BookFactory extends Factory
     {
         return [
             'name' => fake()->sentence(3),
-            'author_id' => random_int(1,10),
-            'publisher_id' => random_int(1,10),
-            'genre_id' => random_int(1,10),
+            'author_id' => Author::factory(),
+            'publisher_id' => Publisher::factory(),
+            'genre_id' => Genre::factory(),
         ];
     }
 }

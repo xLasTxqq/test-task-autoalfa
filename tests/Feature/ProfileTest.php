@@ -4,37 +4,37 @@ namespace Tests\Feature;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Laravel\Sanctum\Sanctum;
 use Tests\TestCase;
 
 class ProfileTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_profile_page_is_displayed()
-    {
-        $user = User::factory()->create();
+    // public function test_profile_page_is_displayed()
+    // {
+    //     $user = User::factory()->create();
 
-        $response = $this
-            ->actingAs($user)
-            ->get('/profile');
+    //     $response = $this
+    //         ->actingAs($user)
+    //         ->get('/profile');
 
-        $response->assertOk();
-    }
+    //     $response->assertOk();
+    // }
 
     public function test_profile_information_can_be_updated()
     {
         $user = User::factory()->create();
 
+        Sanctum::actingAs($user);
+
         $response = $this
-            ->actingAs($user)
-            ->patch('/profile', [
+            ->patchJson('/api/v1/profile', [
                 'name' => 'Test User',
                 'email' => 'test@example.com',
             ]);
 
-        $response
-            ->assertSessionHasNoErrors()
-            ->assertRedirect('/profile');
+        $response->assertJsonPath('status', true)->assertOk();
 
         $user->refresh();
 
@@ -47,16 +47,15 @@ class ProfileTest extends TestCase
     {
         $user = User::factory()->create();
 
+        Sanctum::actingAs($user);
+
         $response = $this
-            ->actingAs($user)
-            ->patch('/profile', [
+            ->patchJson('/api/v1/profile', [
                 'name' => 'Test User',
                 'email' => $user->email,
             ]);
 
-        $response
-            ->assertSessionHasNoErrors()
-            ->assertRedirect('/profile');
+        $response->assertJsonPath('status', true)->assertOk();
 
         $this->assertNotNull($user->refresh()->email_verified_at);
     }
@@ -65,17 +64,16 @@ class ProfileTest extends TestCase
     {
         $user = User::factory()->create();
 
+        Sanctum::actingAs($user);
+
         $response = $this
-            ->actingAs($user)
-            ->delete('/profile', [
+            ->deleteJson('/api/v1/profile', [
                 'password' => 'password',
             ]);
 
-        $response
-            ->assertSessionHasNoErrors()
-            ->assertRedirect('/');
+        $response->assertJsonPath('status', true)->assertOk();
 
-        $this->assertGuest();
+        $this->assertGuest('web');
         $this->assertNull($user->fresh());
     }
 
@@ -83,16 +81,14 @@ class ProfileTest extends TestCase
     {
         $user = User::factory()->create();
 
+        Sanctum::actingAs($user);
+
         $response = $this
-            ->actingAs($user)
-            ->from('/profile')
-            ->delete('/profile', [
+            ->deleteJson('/api/v1/profile', [
                 'password' => 'wrong-password',
             ]);
 
-        $response
-            ->assertSessionHasErrors('password')
-            ->assertRedirect('/profile');
+        $response->assertJsonMissingPath('status', true)->assertStatus(422);
 
         $this->assertNotNull($user->fresh());
     }
